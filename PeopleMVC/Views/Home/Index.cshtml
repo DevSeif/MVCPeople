@@ -1,0 +1,58 @@
+﻿@model IEnumerable<PeopleMVC.Models.Person>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    <form>
+        <input type="text" name="filterWord" value="Search" required>
+        <input type="submit" value="Search">
+    </form>
+    
+}
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    <input type="text" name="personName" value="Name" required>
+    <input type="text" name="personPhone" value="Phone" required>
+    <input type="text" name="personCity" value="City" required>
+    <input type="submit" value="Add">
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>               
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
