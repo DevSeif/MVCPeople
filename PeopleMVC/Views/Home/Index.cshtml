@@ -6,20 +6,23 @@
 
 @using (Html.BeginForm("Index", "Home"))
 {
-    <form>
+    <div id="search-form">
         <input type="text" name="filterWord" value="Search" required>
         <input type="submit" value="Search">
-    </form>
+    </div>
     
 }
 
-@using (Html.BeginForm("Index", "Home"))
-{
-    <input type="text" name="personName" value="Name" required>
-    <input type="text" name="personPhone" value="Phone" required>
-    <input type="text" name="personCity" value="City" required>
-    <input type="submit" value="Add">
-}
+
+<div class="text-center">
+     <form method="get" action="@Url.ActionLink("Index", "Home")">
+         <input type="text" name="Name" value="Name" required>
+         <input type="text" name="PhoneNumber" value="Phone" required>
+         <input type="text" name="City" value="City" required>
+         <input type="submit" value="Add">
+     </form>
+</div>
+
 
 <table class="table">
     <thead>

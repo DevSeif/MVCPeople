@@ -9,7 +9,7 @@ namespace PeopleMVC.Models
         public string Name { get; set; }
 
         [Required]
-        [Range(9, 13)]
+        [MaxLength(13)]
         public string PhoneNumber { get; set; }
 
         [Required]

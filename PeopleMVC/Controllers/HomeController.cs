@@ -7,16 +7,17 @@ namespace PeopleMVC.Controllers
     public class HomeController : Controller
     {
 
+        PeopleViewModel peopleViewModel = new PeopleViewModel();
+
         public IActionResult Index()
         {
-            PeopleViewModel peopleViewModel = new PeopleViewModel();
             return View(peopleViewModel.people);
         }
 
         [HttpPost]
         public IActionResult Index(string filterWord)
         {
-            PeopleViewModel peopleViewModel = new PeopleViewModel();
+            
             List<Person> filterList = new List<Person>();
 
             if (filterWord == null || filterWord.Trim() == "") { return View(peopleViewModel.people); }
@@ -34,14 +35,17 @@ namespace PeopleMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string personName, string personPhone, string personCity)
+        public IActionResult Index(CreatePersonViewModel model)
         {
-            //CreatePersonViewModel model = new CreatePersonViewModel();
-            Person person = new Person(personName, personPhone, personCity);
-            PeopleViewModel peopleViewModel = new PeopleViewModel();
-            peopleViewModel.people.Add(person);
+            if (ModelState.IsValid)
+            {
+                Person person = new Person(model.Name, model.PhoneNumber, model.City);
+                peopleViewModel.people.Add(person);
+                ViewBag.Msg = model.Name;
+            }
+            
 
-            return View(peopleViewModel);
+            return View(peopleViewModel.people);
         }
 
     }
